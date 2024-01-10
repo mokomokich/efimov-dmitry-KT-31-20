@@ -11,7 +11,7 @@ using dmitry_efimov_kt_31_20.Data;
 namespace dmitryefimovkt3120.Migrations
 {
     [DbContext(typeof(Academic_performanceDbContext))]
-    [Migration("20240110214422_CreateDatabase")]
+    [Migration("20240110223404_CreateDatabase")]
     partial class CreateDatabase
     {
         /// <inheritdoc />
@@ -36,7 +36,7 @@ namespace dmitryefimovkt3120.Migrations
 
                     b.Property<int>("GradeRatings")
                         .HasMaxLength(100)
-                        .HasColumnType("int")
+                        .HasColumnType("int4")
                         .HasColumnName("c_ratings_ratingsgrade")
                         .HasComment("Оценка за экзамен");
 
@@ -85,12 +85,12 @@ namespace dmitryefimovkt3120.Migrations
                         .HasComment("Отчество студента");
 
                     b.Property<int>("RatingsId")
-                        .HasColumnType("int")
+                        .HasColumnType("int4")
                         .HasColumnName("c_student_ratings_id")
                         .HasComment("Оценка");
 
-                    b.Property<int>("TestId")
-                        .HasColumnType("int")
+                    b.Property<bool>("TestId")
+                        .HasColumnType("int4")
                         .HasColumnName("c_student_test_id")
                         .HasComment("Зачет");
 
@@ -116,7 +116,7 @@ namespace dmitryefimovkt3120.Migrations
 
                     b.Property<int>("IsTheTest")
                         .HasMaxLength(100)
-                        .HasColumnType("int")
+                        .HasColumnType("int4")
                         .HasColumnName("c_test_isthetest")
                         .HasComment("Есть зачет или нет");
 

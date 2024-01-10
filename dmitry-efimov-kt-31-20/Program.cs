@@ -11,7 +11,7 @@ var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentCla
 builder.Services.Configure<Academic_performanceDbContext>(
     builder.Configuration.GetSection(nameof(Academic_performanceDbContext)));
 builder.Services.AddDbContext<Academic_performanceDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 try
 {
 

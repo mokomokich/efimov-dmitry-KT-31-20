@@ -17,7 +17,7 @@ namespace dmitryefimovkt3120.Migrations
                     ratingsid = table.Column<int>(name: "ratings_id", type: "int", nullable: false, comment: "Идентификатор экзамена")
                         .Annotation("SqlServer:Identity", "1, 1"),
                     cratingsratingsname = table.Column<string>(name: "c_ratings_ratingsname", type: "varchar(100)", maxLength: 100, nullable: false, comment: "Название предмета по которому экзамен"),
-                    cratingsratingsgrade = table.Column<int>(name: "c_ratings_ratingsgrade", type: "int", maxLength: 100, nullable: false, comment: "Оценка за экзамен")
+                    cratingsratingsgrade = table.Column<int>(name: "c_ratings_ratingsgrade", type: "int4", maxLength: 100, nullable: false, comment: "Оценка за экзамен")
                 },
                 constraints: table =>
                 {
@@ -31,7 +31,7 @@ namespace dmitryefimovkt3120.Migrations
                     testid = table.Column<int>(name: "test_id", type: "int", nullable: false, comment: "Идентификатор зачета")
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ctesttestname = table.Column<string>(name: "c_test_testname", type: "varchar(100)", maxLength: 100, nullable: false, comment: "Название предмета по которому зачет"),
-                    ctestisthetest = table.Column<int>(name: "c_test_isthetest", type: "int", maxLength: 100, nullable: false, comment: "Есть зачет или нет")
+                    ctestisthetest = table.Column<int>(name: "c_test_isthetest", type: "int4", maxLength: 100, nullable: false, comment: "Есть зачет или нет")
                 },
                 constraints: table =>
                 {
@@ -47,8 +47,8 @@ namespace dmitryefimovkt3120.Migrations
                     cstudentfirstname = table.Column<string>(name: "c_student_firstname", type: "varchar(100)", maxLength: 100, nullable: false, comment: "Имя студента"),
                     cstudentlastname = table.Column<string>(name: "c_student_lastname", type: "varchar(100)", maxLength: 100, nullable: false, comment: "Фамилия студента"),
                     cstudentmiddlename = table.Column<string>(name: "c_student_middlename", type: "varchar(100)", maxLength: 100, nullable: false, comment: "Отчество студента"),
-                    cstudentratingsid = table.Column<int>(name: "c_student_ratings_id", type: "int", nullable: false, comment: "Оценка"),
-                    cstudenttestid = table.Column<int>(name: "c_student_test_id", type: "int", nullable: false, comment: "Зачет")
+                    cstudentratingsid = table.Column<int>(name: "c_student_ratings_id", type: "int4", nullable: false, comment: "Оценка"),
+                    cstudenttestid = table.Column<bool>(name: "c_student_test_id", type: "int4", nullable: false, comment: "Зачет")
                 },
                 constraints: table =>
                 {
