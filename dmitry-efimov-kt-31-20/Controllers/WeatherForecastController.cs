@@ -1,6 +1,7 @@
+using dmitry_efimov_kt_31_20;
 using Microsoft.AspNetCore.Mvc;
 
-namespace dmitry_efimov_kt_31_20.Controllers
+namespace Dmitry_efimov_kt_31_20.Controllers
 {
     [ApiController]
     [Route("[controller]")]
