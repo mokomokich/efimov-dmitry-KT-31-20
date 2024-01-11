@@ -1,4 +1,6 @@
 using dmitry_efimov_kt_31_20.Data;
+using dmitry_efimov_kt_31_20.ServiceExtensions;
+using dmitry_efimov_kt_31_20.StudentInterfaces;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
@@ -12,6 +14,10 @@ builder.Services.Configure<Academic_performanceDbContext>(
     builder.Configuration.GetSection(nameof(Academic_performanceDbContext)));
 builder.Services.AddDbContext<Academic_performanceDbContext>(options =>
 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IStudentService, StudentFilterService>();
+builder.Services.AddService();
+
 try
 {
 
