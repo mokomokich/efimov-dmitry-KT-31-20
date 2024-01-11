@@ -1,4 +1,5 @@
 using dmitry_efimov_kt_31_20.Data;
+using dmitry_efimov_kt_31_20.Middleware;
 using dmitry_efimov_kt_31_20.ServiceExtensions;
 using dmitry_efimov_kt_31_20.StudentInterfaces;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +35,7 @@ try
         app.UseSwagger();
         app.UseSwaggerUI();
     }
-
+    app.UseMiddleware<ExceptionHandlerMiddleware>();
     app.UseAuthorization();
     app.MapControllers();
     app.Run();
