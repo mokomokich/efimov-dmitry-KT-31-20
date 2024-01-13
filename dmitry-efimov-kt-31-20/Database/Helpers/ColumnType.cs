@@ -1,4 +1,4 @@
-﻿namespace dmitry_efimov_kt_31_20.Data.Helpers
+﻿namespace dmitry_efimov_kt_31_20.Database.Helpers
 {
     public class ColumnType
     {
@@ -11,6 +11,5 @@
         public const string Long = "int8";
         public const string Decimal = "money";
         public const string Double = "numeric(9,2)";
-
     }
 }

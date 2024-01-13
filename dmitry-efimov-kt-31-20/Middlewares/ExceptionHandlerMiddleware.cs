@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace dmitry_efimov_kt_31_20.Middleware
+namespace dmitry_efimov_kt_31_20.Middlewares
 {
     public class ExceptionHandlerMiddleware
     {

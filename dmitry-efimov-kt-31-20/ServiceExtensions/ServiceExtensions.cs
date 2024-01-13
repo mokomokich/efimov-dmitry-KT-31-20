@@ -1,12 +1,13 @@
-﻿using dmitry_efimov_kt_31_20.StudentInterfaces;
+﻿using dmitry_efimov_kt_31_20.Interfaces.StudentsInterfaces;
 
 namespace dmitry_efimov_kt_31_20.ServiceExtensions
 {
     public static class ServiceExtensions
     {
-        public static IServiceCollection AddService(this IServiceCollection services)
+        public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddScoped<IStudentService, StudentFilterService>();
+            services.AddScoped<IStudentService, StudentService>();
+
             return services;
         }
     }
