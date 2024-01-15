@@ -11,6 +11,7 @@ namespace dmitry_efimov_kt_31_20.Interfaces.StudentsInterfaces
         public Task<Student[]> GetStudentsByIdAsync(StudentIdFilter filter, CancellationToken cancellationToken);
         public Task<Student[]> GetStudentsByNameAsync(StudentNameFilter filter, CancellationToken cancellationToken);
         public Task<Student[]> GetStudentsByGroupIdAsync(StudentGroupId filter, CancellationToken cancellationToken);
+
     }
 
     public class StudentService : IStudentService
@@ -45,5 +46,9 @@ namespace dmitry_efimov_kt_31_20.Interfaces.StudentsInterfaces
 
             return studentsid;
         }
+
+    
+
+ 
     }
 }

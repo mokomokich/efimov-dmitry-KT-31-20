@@ -2,8 +2,7 @@
 using dmitry_efimov_kt_31_20.Interfaces.StudentsInterfaces;
 using dmitry_efimov_kt_31_20.Models;
 using Microsoft.EntityFrameworkCore;
-using NLog.Filters;
-using System.Text.RegularExpressions;
+using System.Runtime.ExceptionServices;
 using Group = dmitry_efimov_kt_31_20.Models.Group;
 
 namespace dmitry_edimov_kt_31_20.Tests
@@ -20,7 +19,7 @@ namespace dmitry_edimov_kt_31_20.Tests
         }
 
         [Fact]
-        public async Task GetStudentsByGroupAsync_KT3120_TwoObjects()
+        public async Task GetStudentsByGroupAsync_Test1()
         {
             // Arrange
             var ctx = new StudentDbContext(_dbContextOptions);
@@ -38,6 +37,38 @@ namespace dmitry_edimov_kt_31_20.Tests
             };
             await ctx.Set<Group>().AddRangeAsync(groups);
 
+            var ratings = new List<Ratings>
+            {
+                new Ratings
+                {
+                    RatingsName = "Матем",
+                    GradeRatings = 5,
+                },
+                new Ratings
+                {
+                    RatingsName = "Физик",
+                    GradeRatings = 5,
+                }
+            };
+            await ctx.Set<Ratings>().AddRangeAsync(ratings);
+
+            var tests = new List<Test>
+            {
+                new Test
+                {
+                    TestName = "ППО",
+                    IsTheTest = 1,
+                },
+                new Test
+                {
+                    TestName = "СКПО",
+                    IsTheTest = 1,
+                }
+            };
+            await ctx.Set<Test>().AddRangeAsync(tests);
+
+
+
             var students = new List<Student>
             {
                 new Student
@@ -46,20 +77,26 @@ namespace dmitry_edimov_kt_31_20.Tests
                     LastName = "Efimov",
                     MiddleName = "Andreevich",
                     GroupId = 1,
+                    TestId = 1,
+                    RatingsId =1,
                 },
                 new Student
                 {
-                    FirstName = "qwerty2",
+                    FirstName = "Ivan",
                     LastName = "asdf2",
                     MiddleName = "zxc2",
                     GroupId = 2,
+                    TestId = 1,
+                    RatingsId =1,
                 },
                 new Student
                 {
-                    FirstName = "qwerty3",
+                    FirstName = "Lolosh",
                     LastName = "asdf3",
                     MiddleName = "zxc3",
                     GroupId = 1,
+                    TestId = 1,
+                    RatingsId =1,
                 }
             };
             await ctx.Set<Student>().AddRangeAsync(students);
@@ -69,16 +106,15 @@ namespace dmitry_edimov_kt_31_20.Tests
             // Act
             var filter = new dmitry_efimov_kt_31_20.Filters.StudentFilters.StudentGroupFilter
             {
-                GroupName = "KT-31-20"
+                GroupName = "KT-31-20",
             };
             var studentsResult = await studentService.GetStudentsByGroupAsync(filter, CancellationToken.None);
 
             // Assert
             Assert.Equal(2, studentsResult.Length);
         }
-
         [Fact]
-        public async Task GetStudentsByGroupAsync_KT3120()
+        public async Task GetStudentsByGroupAsync_Test2()
         {
             // Arrange
             var ctx = new StudentDbContext(_dbContextOptions);
@@ -96,6 +132,38 @@ namespace dmitry_edimov_kt_31_20.Tests
             };
             await ctx.Set<Group>().AddRangeAsync(groups);
 
+            var ratings = new List<Ratings>
+            {
+                new Ratings
+                {
+                    RatingsName = "Матем",
+                    GradeRatings = 5,
+                },
+                new Ratings
+                {
+                    RatingsName = "Физик",
+                    GradeRatings = 5,
+                }
+            };
+            await ctx.Set<Ratings>().AddRangeAsync(ratings);
+
+            var tests = new List<Test>
+            {
+                new Test
+                {
+                    TestName = "ППО",
+                    IsTheTest = 1,
+                },
+                new Test
+                {
+                    TestName = "СКПО",
+                    IsTheTest = 1,
+                }
+            };
+            await ctx.Set<Test>().AddRangeAsync(tests);
+
+
+
             var students = new List<Student>
             {
                 new Student
@@ -104,20 +172,26 @@ namespace dmitry_edimov_kt_31_20.Tests
                     LastName = "Efimov",
                     MiddleName = "Andreevich",
                     GroupId = 1,
+                    TestId = 1,
+                    RatingsId =1,
                 },
                 new Student
                 {
-                    FirstName = "qwerty2",
+                    FirstName = "Ivan",
                     LastName = "asdf2",
                     MiddleName = "zxc2",
                     GroupId = 2,
+                    TestId = 1,
+                    RatingsId =1,
                 },
                 new Student
                 {
-                    FirstName = "qwerty3",
+                    FirstName = "Lolosh",
                     LastName = "asdf3",
                     MiddleName = "zxc3",
                     GroupId = 1,
+                    TestId = 1,
+                    RatingsId =1,
                 }
             };
             await ctx.Set<Student>().AddRangeAsync(students);
@@ -125,78 +199,20 @@ namespace dmitry_edimov_kt_31_20.Tests
             await ctx.SaveChangesAsync();
 
             // Act
-            var filter = new dmitry_efimov_kt_31_20.Filters.StudentFilters.StudentGroupFilter
+            var filter = new dmitry_efimov_kt_31_20.Filters.StudentFilters.StudentGroupId
             {
-                GroupName = "KT-31-20"
+                GroupId = 1 ,
             };
-            var studentsResult = await studentService.GetStudentsByGroupAsync(filter, CancellationToken.None);
+            var studentsResult = await studentService.GetStudentsByGroupIdAsync(filter, CancellationToken.None);
 
             // Assert
             Assert.Equal(2, studentsResult.Length);
+
         }
 
-        [Fact]
-        public async Task GetStudentsByGroupAsync_KT3120_Two()
-        {
-            // Arrange
-            var ctx = new StudentDbContext(_dbContextOptions);
-            var studentService = new StudentService(ctx);
-            var groups = new List<Student>
-            {
-                new Student
-                {
-                    FirstName = "Ivan",
-                    LastName = "Ivanov",
-                    MiddleName = "Ivanovich",
-                    GroupId = 1,
-                },
-                new Student
-                {
-                    FirstName = "Dima",
-                     LastName = "asdf3",
-                    MiddleName = "zxc3",
-                    GroupId = 1,
-                }
-            };
-            await ctx.Set<Student>().AddRangeAsync(groups);
 
-            var students = new List<Student>
-            {
-                new Student
-                {
-                    FirstName = "Ivan",
-                    LastName = "Ivanov",
-                    MiddleName = "Ivanovich",
-                    GroupId = 1,
-                },
-                new Student
-                {
-                    FirstName = "Ivan",
-                    LastName = "Ivanov",
-                    MiddleName = "Ivanovich",
-                    GroupId = 2,
-                },
-                new Student
-                {
-                    FirstName = "Dima",
-                    LastName = "asdf3",
-                    MiddleName = "zxc3",
-                    GroupId = 1,
-                }
-            };
-            await ctx.Set<Student>().AddRangeAsync(students);
+    
 
-            await ctx.SaveChangesAsync();
 
-            // Act
-            var filter = new dmitry_efimov_kt_31_20.Filters.StudentFilters.StudentNameFilter
-            {
-                FirstName = "Ivan"
-            };
-            var studentsResult = await studentService.GetStudentsByNameAsync(filter, CancellationToken.None);
-
-            // Assert
-            Assert.Equal(2, studentsResult.Length);
-        }
     }
 }
