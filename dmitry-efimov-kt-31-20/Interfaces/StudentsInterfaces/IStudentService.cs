@@ -11,7 +11,7 @@ namespace dmitry_efimov_kt_31_20.Interfaces.StudentsInterfaces
         public Task<Student[]> GetStudentsByIdAsync(StudentIdFilter filter, CancellationToken cancellationToken);
         public Task<Student[]> GetStudentsByNameAsync(StudentNameFilter filter, CancellationToken cancellationToken);
         public Task<Student[]> GetStudentsByGroupIdAsync(StudentGroupId filter, CancellationToken cancellationToken);
-
+        public Task<Student[]> GetStudNameee(StudName filter, CancellationToken cancellationToken);
     }
 
     public class StudentService : IStudentService
@@ -27,6 +27,17 @@ namespace dmitry_efimov_kt_31_20.Interfaces.StudentsInterfaces
 
             return students;
         }
+        public Task<Student[]> GetStudNameee(StudName filter, CancellationToken cancellationToken = default)
+        {
+            var group = _dbContext.Set<Group>().Where(w => w.GroupId == filter.GroupId).ToArrayAsync(cancellationToken);
+            var students = _dbContext.Set<Student>().Where(w => w.FirstName == filter.FirstName).ToArrayAsync(cancellationToken);
+
+            return students;
+        }
+
+
+
+
         public Task<Student[]> GetStudentsByIdAsync(StudentIdFilter filter, CancellationToken cancellationToken = default)
         {
             var studentsid = _dbContext.Set<Student>().Where(w => w.StudentId == filter.StudentId).ToArrayAsync(cancellationToken);

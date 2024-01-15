@@ -210,9 +210,102 @@ namespace dmitry_edimov_kt_31_20.Tests
 
         }
 
+        [Fact]
+        public async Task GetStudentsByGroupAsync_Test3()
+        {
+            // Arrange
+            var ctx = new StudentDbContext(_dbContextOptions);
+            var studentService = new StudentService(ctx);
+            var groups = new List<Group>
+            {
+                new Group
+                {
+                    GroupName = "KT-31-20"
+                },
+                new Group
+                {
+                    GroupName = "KT-40-21"
+                }
+            };
+            await ctx.Set<Group>().AddRangeAsync(groups);
 
-    
+            var ratings = new List<Ratings>
+            {
+                new Ratings
+                {
+                    RatingsName = "Матем",
+                    GradeRatings = 5,
+                },
+                new Ratings
+                {
+                    RatingsName = "Физик",
+                    GradeRatings = 5,
+                }
+            };
+            await ctx.Set<Ratings>().AddRangeAsync(ratings);
 
+            var tests = new List<Test>
+            {
+                new Test
+                {
+                    TestName = "ППО",
+                    IsTheTest = 1,
+                },
+                new Test
+                {
+                    TestName = "СКПО",
+                    IsTheTest = 1,
+                }
+            };
+            await ctx.Set<Test>().AddRangeAsync(tests);
+
+
+
+            var students = new List<Student>
+            {
+                new Student
+                {
+                    FirstName = "Ivan",
+                    LastName = "Efimov",
+                    MiddleName = "Andreevich",
+                    GroupId = 1,
+                    TestId = 1,
+                    RatingsId =1,
+                },
+                new Student
+                {
+                    FirstName = "Ivan",
+                    LastName = "asdf2",
+                    MiddleName = "zxc2",
+                    GroupId = 1,
+                    TestId = 1,
+                    RatingsId =1,
+                },
+                new Student
+                {
+                    FirstName = "Ivan",
+                    LastName = "asdf3",
+                    MiddleName = "zxc3",
+                    GroupId = 1,
+                    TestId = 1,
+                    RatingsId =1,
+                }
+            };
+            await ctx.Set<Student>().AddRangeAsync(students);
+
+            await ctx.SaveChangesAsync();
+
+            // Act
+            var filter = new dmitry_efimov_kt_31_20.Filters.StudentFilters.StudName
+            {
+                FirstName = "Ivan",
+                GroupId = 1,
+            };
+            var studentsResult = await studentService.GetStudNameee(filter, CancellationToken.None);
+
+            // Assert
+            Assert.Equal(3, studentsResult.Length);
+        }
 
     }
 }
